@@ -13,6 +13,35 @@
 	<title>Title</title>
 </head>
 <body>
+	
+	<div class='container'>
+		<div class='row'>
+			<img id='header-img' src="http://www.onceinabluemoonfarm.com/assets/images/fruit_headerIMG.jpg" alt='Header img' />
+			<br>
+		</div>
+		<div class='row'>
+			<div class='col-md-6'>
+				<h3>Add an item:</h3>
+				<form id='new-list-item'>
+					<div class='form-group'>
+						<p><b>Item name:</b></p>
+						<input class='form-control top' id='item-name' placeholder='Enter item name' autofocus>
+					</div>
+					<div class='form-group'>
+						<p><b>Item price:</b></p>
+						<input class='form-control' id='item-price' placeholder='Enter item price'>
+					</div>
+					<div class="form-group">
+		            	<input type="submit" class="btn btn-primary" value="Add">
+		         	</div>
+				</form>
+			</div>
+			<div class='col-md-6 right align-right'>
+				<h3>Things I need:</h3>
+				<div class='container' id='item-list'></div>
+			</div>
+		</div>
+	</div>
 
 	<!-- jquery -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -24,6 +53,13 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
 	<!-- custom script -->
-	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="scripts.js"></script>
+
+	<script type='text/template' id='list-template'>
+		<div class='item'>
+			<p><b><%= name %> | </b></p><p> $<%= price %></p>
+			<br>
+		</div>
+	</script>
 </body>
 </html>
