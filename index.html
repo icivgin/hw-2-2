@@ -13,35 +13,50 @@
 	<title>Title</title>
 </head>
 <body>
-	
-	<div class='container'>
+	<div class='jumbotron text-center'>
+		<h1>Underscore / OOP practice & HW</h1>
+	</div>
+
+
+
+
+	<div class="container pad-bottom">
 		<div class='row'>
-			<img id='header-img' src="http://www.onceinabluemoonfarm.com/assets/images/fruit_headerIMG.jpg" alt='Header img' />
-			<br>
-		</div>
-		<div class='row'>
-			<div class='col-md-6'>
+			<div class='col-lg-9'>
+				<h3>Things I need: <a type="button" class="" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="right" data-content="Click an item to delete."><span class='glyphicon glyphicon-question-sign' aria-hidden='true'></span>
+</a></h3>
+				<div id='item-list'></div>
+			</div>
+			<div class='col-lg-3'>
 				<h3>Add an item:</h3>
 				<form id='new-list-item'>
 					<div class='form-group'>
 						<p><b>Item name:</b></p>
-						<input class='form-control top' id='item-name' placeholder='Enter item name' autofocus>
+						<input class='form-control top' id='item-name' placeholder='Enter item name' autofocus required>
 					</div>
 					<div class='form-group'>
 						<p><b>Item price:</b></p>
-						<input class='form-control' id='item-price' placeholder='Enter item price'>
+						<input class='form-control' id='item-price' placeholder='Enter item price' required>
+					</div>
+					<div class='form-group'>
+						<p><b>Img url:</b></p>
+						<input class='form-control' id='item-img-url' placeholder='Enter url'>
 					</div>
 					<div class="form-group">
 		            	<input type="submit" class="btn btn-primary" value="Add">
 		         	</div>
 				</form>
 			</div>
-			<div class='col-md-6 right align-right'>
-				<h3>Things I need:</h3>
-				<div class='container' id='item-list'></div>
-			</div>
 		</div>
 	</div>
+<!-- 				// <div class='row'>
+			// 	<div class='col-md-3 text-left'>
+			// 		<p><b><%= name %> | </b></p><p> $<%= price %></p>
+			// 	</div>
+			// 	<div class='col-md-9'>
+			// 		<img src="<%= url %>" />
+			// 	</div>
+			// </div> -->
 
 	<!-- jquery -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -56,9 +71,11 @@
 	<script type="text/javascript" src="scripts.js"></script>
 
 	<script type='text/template' id='list-template'>
-		<div class='item'>
+		<div class='item text-center'>
+
+			<img src="<%= url %>" />
 			<p><b><%= name %> | </b></p><p> $<%= price %></p>
-			<br>
+			<br><hr>
 		</div>
 	</script>
 </body>

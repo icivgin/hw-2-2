@@ -6,45 +6,55 @@ var $itemName = $('#item-name');
 
 var $itemPrice = $('#item-price');
 
+var $itemUrl = $('#item-img-url');
+
 var $itemList = $('#item-list');
 
 var itemTemplate = _.template($('#list-template').html());
 
-var arr = [
-	{name: 'baseball bat', price: 20},
-	{name: 'car', price: 2000}
-];
-
-// Item constructor
-var Item = function (name, price) {
-	this.name = name;
-	this.price = price;
-}
-
-// append
-_.each(arr, function (item, index) {
-	var $item = $(itemTemplate(item));
-	$item.attr('data-index', index);
-	$itemList.append($item);
+//popover
+$(function () {
+  $('[data-toggle="popover"]').popover()
 });
 
-// push
-function push(item) {
-		var $item = $(itemTemplate(item));
-		console.log((arr.length - 1));
-		$item.attr('data-index', (arr.length - 1));
-		$itemList.append($item);
+// Item constructor
+var Item = function (name, price, url) {
+	this.name = name;
+	this.price = price;
+	this.url = url;
 }
+
+Item.all = [];
+
+Item.prototype.save = function() {
+	Item.all.push(this);
+}
+
+Item.prototype.render = function() {
+	var $item = $(itemTemplate(this));
+	$itemList.append($item);
+	$item.attr('data-index', Item.all.length);
+}
+
+//append hard items
+var i1 = new Item('Baseball bat', 20, 'http://www.easyvectors.com/assets/images/thumbs/afbig/baseball-bat-clip-art.jpg')
+var i2 = new Item('Car', 2000, 'http://www.wellclean.com/wp-content/themes/artgallery_3.0/images/car3.png')
+i1.render();
+i1.save();
+i2.render();
+i2.save();
+
+console.log(Item);
 
 // submit
 $newListItem.on('submit', function(event) {
 	event.preventDefault();
 
-	var element = new Item(($itemName.val()), ($itemPrice.val()));
-	arr.push(element);
+	var element = new Item(($itemName.val()), ($itemPrice.val()), ($itemUrl.val() || 'images/no-image.jpg'));
+	element.save();
+	element.render();
 
-	push(element);
-
+	// reset
 	$itemName.val('');
 	$itemPrice.val('');
 	$itemName.focus();
@@ -53,21 +63,16 @@ $newListItem.on('submit', function(event) {
 
 //remove
 $itemList.on('click', '.item', function() {
-	var index = $(this).attr('data-index');
 
-	//remove from model
-	arr.splice(index, 1);
-
-	//remove from dom
+	var _index = $(this).attr('data-index');
+	Item.all.splice(_index, 1);
 	$(this).remove();
 
 	//reindex
-	$('.item').each(function(index) {
-		$(this).attr('data-index', index);
+	$('.item').each(function(_index) {
+		$(this).attr('data-index', _index);
 	});
 
-	console.log($itemList.html());
 });
-
 
 })
